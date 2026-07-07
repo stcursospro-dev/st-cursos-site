@@ -127,6 +127,8 @@ async function carregarCursos(){
 
         mostrarDestaques();
 
+        atualizarTitulo();
+
         iniciarPesquisa();
 
         iniciarCategorias();
@@ -1091,7 +1093,7 @@ function atualizarTitulo(){
 
 }
 
-setTimeout(atualizarTitulo,1200);
+
 
 //======================================
 // PRELOAD DAS PRIMEIRAS IMAGENS
