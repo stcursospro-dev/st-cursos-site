@@ -1481,3 +1481,85 @@ PESQUISA STEAM
     margin-top:6px;
 
 }
+
+/* Toast */
+
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:40px;
+
+transform:translateX(-50%) translateY(30px);
+
+background:#22c55e;
+
+color:#fff;
+
+padding:14px 22px;
+
+border-radius:12px;
+
+font-weight:600;
+
+opacity:0;
+
+transition:.3s;
+
+z-index:99999;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+/* Voltar ao topo */
+
+.voltar-topo{
+
+position:fixed;
+
+right:30px;
+
+bottom:30px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:#22c55e;
+
+color:#fff;
+
+font-size:24px;
+
+cursor:pointer;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:.3s;
+
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
+
+.voltar-topo:hover{
+
+transform:translateY(-5px);
+
+background:#18a34a;
+
+}
