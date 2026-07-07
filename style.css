@@ -1378,3 +1378,106 @@ RESPONSIVO
     }
 
 }
+
+
+/*==========================
+PESQUISA STEAM
+==========================*/
+
+.search-box{
+
+    position:relative;
+
+}
+
+#search-results{
+
+    position:absolute;
+
+    top:110%;
+
+    left:0;
+
+    width:100%;
+
+    background:#171717;
+
+    border:1px solid #2c2c2c;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    display:none;
+
+    z-index:999;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+
+}
+
+.search-item{
+
+    display:flex;
+
+    gap:15px;
+
+    padding:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.search-item:hover{
+
+    background:#222;
+
+}
+
+.search-item img{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+}
+
+.search-info{
+
+    flex:1;
+
+}
+
+.search-info h4{
+
+    color:white;
+
+    margin-bottom:5px;
+
+    font-size:15px;
+
+}
+
+.search-info p{
+
+    color:#8b8b8b;
+
+    font-size:13px;
+
+}
+
+.search-price{
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+    margin-top:6px;
+
+}
