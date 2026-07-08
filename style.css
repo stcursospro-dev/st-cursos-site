@@ -1384,182 +1384,270 @@ RESPONSIVO
 PESQUISA STEAM
 ==========================*/
 
-.search-box{
+.search-box {
 
-    position:relative;
-
-}
-
-#search-results{
-
-    position:absolute;
-
-    top:110%;
-
-    left:0;
-
-    width:100%;
-
-    background:#171717;
-
-    border:1px solid #2c2c2c;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    display:none;
-
-    z-index:999;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.45);
+    position: relative;
 
 }
 
-.search-item{
+#search-results {
 
-    display:flex;
+    position: absolute;
 
-    gap:15px;
+    top: 110%;
 
-    padding:12px;
+    left: 0;
 
-    cursor:pointer;
+    width: 100%;
 
-    transition:.25s;
+    background: #171717;
 
-}
+    border: 1px solid #2c2c2c;
 
-.search-item:hover{
+    border-radius: 12px;
 
-    background:#222;
+    overflow: hidden;
 
-}
+    display: none;
 
-.search-item img{
+    z-index: 999;
 
-    width:70px;
-
-    height:70px;
-
-    object-fit:cover;
-
-    border-radius:8px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .45);
 
 }
 
-.search-info{
+.search-item {
 
-    flex:1;
+    display: flex;
 
-}
+    gap: 15px;
 
-.search-info h4{
+    padding: 12px;
 
-    color:white;
+    cursor: pointer;
 
-    margin-bottom:5px;
-
-    font-size:15px;
+    transition: .25s;
 
 }
 
-.search-info p{
+.search-item:hover {
 
-    color:#8b8b8b;
-
-    font-size:13px;
+    background: #222;
 
 }
 
-.search-price{
+.search-item img {
 
-    color:#22c55e;
+    width: 70px;
 
-    font-weight:bold;
+    height: 70px;
 
-    margin-top:6px;
+    object-fit: cover;
+
+    border-radius: 8px;
+
+}
+
+.search-info {
+
+    flex: 1;
+
+}
+
+.search-info h4 {
+
+    color: white;
+
+    margin-bottom: 5px;
+
+    font-size: 15px;
+
+}
+
+.search-info p {
+
+    color: #8b8b8b;
+
+    font-size: 13px;
+
+}
+
+.search-price {
+
+    color: #22c55e;
+
+    font-weight: bold;
+
+    margin-top: 6px;
 
 }
 
 /* Toast */
 
-.toast{
+.toast {
 
-position:fixed;
+    position: fixed;
 
-left:50%;
+    left: 50%;
 
-bottom:40px;
+    bottom: 40px;
 
-transform:translateX(-50%) translateY(30px);
+    transform: translateX(-50%) translateY(30px);
 
-background:#22c55e;
+    background: #22c55e;
 
-color:#fff;
+    color: #fff;
 
-padding:14px 22px;
+    padding: 14px 22px;
 
-border-radius:12px;
+    border-radius: 12px;
 
-font-weight:600;
+    font-weight: 600;
 
-opacity:0;
+    opacity: 0;
 
-transition:.3s;
+    transition: .3s;
 
-z-index:99999;
+    z-index: 99999;
 
 }
 
-.toast.show{
+.toast.show {
 
-opacity:1;
+    opacity: 1;
 
-transform:translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0);
 
 }
 
 /* Voltar ao topo */
 
-.voltar-topo{
+.voltar-topo {
 
-position:fixed;
+    position: fixed;
 
-right:30px;
+    right: 30px;
 
-bottom:30px;
+    bottom: 30px;
 
-width:55px;
+    width: 55px;
 
-height:55px;
+    height: 55px;
 
-border:none;
+    border: none;
 
-border-radius:50%;
+    border-radius: 50%;
 
-background:#22c55e;
+    background: #22c55e;
 
-color:#fff;
+    color: #fff;
 
-font-size:24px;
+    font-size: 24px;
 
-cursor:pointer;
+    cursor: pointer;
 
-opacity:0;
+    opacity: 0;
 
-pointer-events:none;
+    pointer-events: none;
 
-transition:.3s;
+    transition: .3s;
 
-box-shadow:0 10px 30px rgba(0,0,0,.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
 
 }
 
-.voltar-topo:hover{
+.voltar-topo:hover {
 
-transform:translateY(-5px);
+    transform: translateY(-5px);
 
-background:#18a34a;
+    background: #18a34a;
+
+}
+
+/*=========================================================
+CARROSSEL SWIPER - ST CURSOS
+=========================================================*/
+
+#mais-vendidos {
+
+    padding-top: 40px;
+
+}
+
+
+.maisVendidosSwiper {
+
+    width: 100%;
+
+    padding: 20px 10px 60px;
+
+}
+
+
+.maisVendidosSwiper .swiper-slide {
+
+    height: auto;
+
+}
+
+
+/* Card dentro do carrossel */
+
+.maisVendidosSwiper .card {
+
+    height: 100%;
+
+}
+
+
+/* Botões */
+
+.maisVendidosSwiper .swiper-button-next,
+.maisVendidosSwiper .swiper-button-prev {
+
+    color: #22c55e;
+
+    width: 45px;
+
+    height: 45px;
+
+    background: #161b22;
+
+    border-radius: 50%;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+
+}
+
+
+.maisVendidosSwiper .swiper-button-next:hover,
+.maisVendidosSwiper .swiper-button-prev:hover {
+
+    background: #22c55e;
+
+    color: white;
+
+}
+
+
+/* Tamanho das setas */
+
+.maisVendidosSwiper .swiper-button-next::after,
+.maisVendidosSwiper .swiper-button-prev::after {
+
+    font-size: 18px;
+
+}
+
+
+/* Mobile */
+
+@media(max-width:700px) {
+
+    .maisVendidosSwiper {
+
+        padding-bottom: 50px;
+
+    }
 
 }

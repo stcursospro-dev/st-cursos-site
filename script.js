@@ -9,7 +9,7 @@
 //===============================
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
+    "https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
 
 //===============================
 // DADOS
@@ -24,31 +24,34 @@ let indiceSelecionado = -1;
 //===============================
 
 const containerCursos =
-document.getElementById("container-cursos");
+    document.getElementById("container-cursos");
 
 const containerDestaques =
-document.querySelector(".cards");
+    document.querySelector(".cards");
+
+const maisVendidosContainer =
+    document.getElementById("mais-vendidos-container");
 
 const pesquisa =
-document.getElementById("pesquisa");
+    document.getElementById("pesquisa");
 
 const searchResults =
-document.getElementById("search-results");
+    document.getElementById("search-results");
 
 const categorias =
-document.querySelectorAll(".categoria");
+    document.querySelectorAll(".categoria");
 
 const btnExplorar =
-document.querySelector(".hero-buttons button");
+    document.querySelector(".hero-buttons button");
 
 const btnDestaques =
-document.querySelector(".hero-buttons .secondary");
+    document.querySelector(".hero-buttons .secondary");
 
 const linkInicio =
-document.querySelector('nav a[href="#topo"]');
+    document.querySelector('nav a[href="#topo"]');
 
 const linkVerTodos =
-document.querySelector("#destaques .section-title a");
+    document.querySelector("#destaques .section-title a");
 
 //===============================
 // LOADING
@@ -58,9 +61,9 @@ mostrarLoading();
 
 //======================================================
 
-function mostrarLoading(){
+function mostrarLoading() {
 
-    containerCursos.innerHTML=`
+    containerCursos.innerHTML = `
 
         <div class="loading">
 
@@ -76,48 +79,48 @@ function mostrarLoading(){
 // BUSCAR CURSOS
 //======================================================
 
-async function carregarCursos(){
+async function carregarCursos() {
 
-    try{
+    try {
 
         const resposta =
-        await fetch(API_URL);
+            await fetch(API_URL);
 
-        if(!resposta.ok){
+        if (!resposta.ok) {
 
             throw new Error("Erro ao buscar cursos.");
 
         }
 
         cursos =
-        await resposta.json();
+            await resposta.json();
 
-        cursos = cursos.map(curso=>{
+        cursos = cursos.map(curso => {
 
-            return{
+            return {
 
                 nome:
-                String(curso.nome || "").trim(),
+                    String(curso.nome || "").trim(),
 
                 categoria:
-                String(curso.categoria || "").trim(),
+                    String(curso.categoria || "").trim(),
 
                 preco:
-                String(curso.preco || "").trim(),
+                    String(curso.preco || "").trim(),
 
                 descricao:
-                String(curso.descricao || "").trim(),
+                    String(curso.descricao || "").trim(),
 
                 imagem:
-                String(curso.imagem || "").trim(),
+                    String(curso.imagem || "").trim(),
 
                 link:
-                String(curso.link || "").trim(),
+                    String(curso.link || "").trim(),
 
                 destaque:
-                String(curso.destaque || "")
-                .trim()
-                .toLowerCase()
+                    String(curso.destaque || "")
+                        .trim()
+                        .toLowerCase()
 
             };
 
@@ -126,6 +129,8 @@ async function carregarCursos(){
         mostrarCursos(cursos);
 
         mostrarDestaques();
+
+        mostrarMaisVendidos();
 
         atualizarTitulo();
 
@@ -139,11 +144,11 @@ async function carregarCursos(){
 
     }
 
-    catch(erro){
+    catch (erro) {
 
         console.error(erro);
 
-        containerCursos.innerHTML=`
+        containerCursos.innerHTML = `
 
             <div class="erro">
 
@@ -173,28 +178,27 @@ carregarCursos();
 // CRIAR CARD
 //======================================================
 
-function criarCard(curso){
+function criarCard(curso) {
 
     return `
 
         <div class="card">
 
-            ${
-                curso.destaque==="sim"
+            ${curso.destaque === "sim"
 
-                ?
+            ?
 
-                `<div class="badge">
+            `<div class="badge">
 
                     ⭐ Destaque
 
                 </div>`
 
-                :
+            :
 
-                ""
+            ""
 
-            }
+        }
 
             <img
                 src="${curso.imagem}"
@@ -247,13 +251,13 @@ function criarCard(curso){
 // MOSTRAR CURSOS
 //======================================================
 
-function mostrarCursos(lista){
+function mostrarCursos(lista) {
 
-    containerCursos.innerHTML="";
+    containerCursos.innerHTML = "";
 
-    if(lista.length===0){
+    if (lista.length === 0) {
 
-        containerCursos.innerHTML=`
+        containerCursos.innerHTML = `
 
             <h2>
 
@@ -267,11 +271,11 @@ function mostrarCursos(lista){
 
     }
 
-    lista.forEach(curso=>{
+    lista.forEach(curso => {
 
-        containerCursos.innerHTML+=
+        containerCursos.innerHTML +=
 
-        criarCard(curso);
+            criarCard(curso);
 
     });
 
@@ -281,23 +285,118 @@ function mostrarCursos(lista){
 // DESTAQUES
 //======================================================
 
-function mostrarDestaques(){
+function mostrarDestaques() {
 
-    containerDestaques.innerHTML="";
+    containerDestaques.innerHTML = "";
 
-    const destaques=
+    const destaques =
 
-    cursos.filter(curso=>
+        cursos.filter(curso =>
 
-        curso.destaque==="sim"
+            curso.destaque === "sim"
 
-    );
+        );
 
-    destaques.forEach(curso=>{
+    destaques.forEach(curso => {
 
-        containerDestaques.innerHTML+=
+        containerDestaques.innerHTML +=
 
-        criarCard(curso);
+            criarCard(curso);
+
+    });
+
+}
+
+// =======================================================
+// CARROSSEL MAIS VENDIDOS
+// =======================================================
+
+function mostrarMaisVendidos() {
+
+    if (!maisVendidosContainer) return;
+
+
+    maisVendidosContainer.innerHTML = "";
+
+
+    const vendidos = cursos.filter(curso => {
+
+        return String(curso.vendido).toLowerCase() === "sim";
+
+    });
+
+
+    vendidos.forEach(curso => {
+
+
+        maisVendidosContainer.innerHTML += `
+
+        <div class="swiper-slide">
+
+            ${criarCard(curso)}
+
+        </div>
+
+        `;
+
+
+    });
+
+
+    iniciarSwiper();
+
+}
+
+
+// =======================================================
+// INICIAR SWIPER
+// =======================================================
+
+function iniciarSwiper() {
+
+    new Swiper(".maisVendidosSwiper", {
+
+        slidesPerView: 4,
+
+        spaceBetween: 25,
+
+        loop: true,
+
+
+        navigation: {
+
+            nextEl: ".swiper-button-next",
+
+            prevEl: ".swiper-button-prev",
+
+        },
+
+
+        breakpoints: {
+
+
+            1200: {
+                slidesPerView: 4
+            },
+
+
+            900: {
+                slidesPerView: 3
+            },
+
+
+            600: {
+                slidesPerView: 2
+            },
+
+
+            300: {
+                slidesPerView: 1
+            }
+
+
+        }
+
 
     });
 
@@ -417,7 +516,7 @@ function mostrarResultadosPesquisa(lista) {
 
     }
 
-    lista.slice(0,5).forEach((curso,index)=>{
+    lista.slice(0, 5).forEach((curso, index) => {
 
         searchResults.innerHTML += `
 
@@ -469,19 +568,19 @@ function mostrarResultadosPesquisa(lista) {
 // CLIQUES
 //===============================
 
-function adicionarEventosPesquisa(){
+function adicionarEventosPesquisa() {
 
     const itens =
 
-    document.querySelectorAll(".search-item");
+        document.querySelectorAll(".search-item");
 
-    itens.forEach(item=>{
+    itens.forEach(item => {
 
-        item.addEventListener("click",()=>{
+        item.addEventListener("click", () => {
 
-            const index=
+            const index =
 
-            Number(item.dataset.index);
+                Number(item.dataset.index);
 
             abrirCurso(
 
@@ -499,7 +598,7 @@ function adicionarEventosPesquisa(){
 // ABRIR CURSO
 //===============================
 
-function abrirCurso(curso){
+function abrirCurso(curso) {
 
     esconderPesquisa();
 
@@ -507,31 +606,31 @@ function abrirCurso(curso){
 
     mostrarCursos([curso]);
 
-    const card=
+    const card =
 
-    document.querySelector(".card");
+        document.querySelector(".card");
 
-    if(card){
+    if (card) {
 
         card.scrollIntoView({
 
-            behavior:"smooth",
+            behavior: "smooth",
 
-            block:"center"
+            block: "center"
 
         });
 
-        card.style.transition=".4s";
+        card.style.transition = ".4s";
 
-        card.style.boxShadow=
+        card.style.boxShadow =
 
-        "0 0 35px #22c55e";
+            "0 0 35px #22c55e";
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
-            card.style.boxShadow="";
+            card.style.boxShadow = "";
 
-        },1500);
+        }, 1500);
 
     }
 
@@ -541,9 +640,9 @@ function abrirCurso(curso){
 // ESCONDER PESQUISA
 //===============================
 
-function esconderPesquisa(){
+function esconderPesquisa() {
 
-    searchResults.style.display="none";
+    searchResults.style.display = "none";
 
 }
 
@@ -551,13 +650,13 @@ function esconderPesquisa(){
 // FECHAR AO CLICAR FORA
 //===============================
 
-document.addEventListener("click",(e)=>{
+document.addEventListener("click", (e) => {
 
-    if(
+    if (
 
         !e.target.closest(".search-box")
 
-    ){
+    ) {
 
         esconderPesquisa();
 
@@ -803,9 +902,9 @@ function atualizarSelecao(itens) {
 // ATALHO CTRL + K
 //===============================
 
-document.addEventListener("keydown", function(e){
+document.addEventListener("keydown", function (e) {
 
-    if(e.ctrlKey && e.key.toLowerCase() === "k"){
+    if (e.ctrlKey && e.key.toLowerCase() === "k") {
 
         e.preventDefault();
 
@@ -819,7 +918,7 @@ document.addEventListener("keydown", function(e){
 // LIMPAR PESQUISA
 //===============================
 
-pesquisa.addEventListener("search",()=>{
+pesquisa.addEventListener("search", () => {
 
     mostrarCursos(cursos);
 
@@ -833,9 +932,9 @@ pesquisa.addEventListener("search",()=>{
 
 const logo = document.querySelector(".logo");
 
-if(logo){
+if (logo) {
 
-    logo.addEventListener("dblclick",()=>{
+    logo.addEventListener("dblclick", () => {
 
         pesquisa.focus();
 
@@ -847,13 +946,13 @@ if(logo){
 // EFEITO NOS CARDS
 //===============================
 
-document.addEventListener("mouseover",(e)=>{
+document.addEventListener("mouseover", (e) => {
 
     const card = e.target.closest(".card");
 
-    if(!card) return;
+    if (!card) return;
 
-    card.style.transition=".35s";
+    card.style.transition = ".35s";
 
 });
 
@@ -869,9 +968,9 @@ console.log("ST Cursos V2 - Parte 3 carregada.");
 // SALVAR CURSOS EM CACHE
 //======================================
 
-function salvarCache(){
+function salvarCache() {
 
-    try{
+    try {
 
         localStorage.setItem(
 
@@ -883,7 +982,7 @@ function salvarCache(){
 
     }
 
-    catch(e){
+    catch (e) {
 
         console.warn("Não foi possível salvar o cache.");
 
@@ -895,21 +994,21 @@ function salvarCache(){
 // LER CACHE
 //======================================
 
-function carregarCache(){
+function carregarCache() {
 
-    try{
+    try {
 
         const cache =
 
-        localStorage.getItem("st_cursos");
+            localStorage.getItem("st_cursos");
 
-        if(!cache) return [];
+        if (!cache) return [];
 
         return JSON.parse(cache);
 
     }
 
-    catch(e){
+    catch (e) {
 
         return [];
 
@@ -923,21 +1022,21 @@ function carregarCache(){
 
 let favoritos =
 
-JSON.parse(
+    JSON.parse(
 
-localStorage.getItem("favoritos") || "[]"
+        localStorage.getItem("favoritos") || "[]"
 
-);
+    );
 
 //======================================
 
-function favoritar(nome){
+function favoritar(nome) {
 
-    if(favoritos.includes(nome)){
+    if (favoritos.includes(nome)) {
 
         favoritos = favoritos.filter(
 
-            item=>item!==nome
+            item => item !== nome
 
         );
 
@@ -945,7 +1044,7 @@ function favoritar(nome){
 
     }
 
-    else{
+    else {
 
         favoritos.push(nome);
 
@@ -967,35 +1066,35 @@ function favoritar(nome){
 // TOAST
 //======================================
 
-function toast(texto){
+function toast(texto) {
 
     const aviso =
 
-    document.createElement("div");
+        document.createElement("div");
 
-    aviso.className="toast";
+    aviso.className = "toast";
 
-    aviso.innerText=texto;
+    aviso.innerText = texto;
 
     document.body.appendChild(aviso);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         aviso.classList.add("show");
 
-    },20);
+    }, 20);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         aviso.classList.remove("show");
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
             aviso.remove();
 
-        },300);
+        }, 300);
 
-    },2200);
+    }, 2200);
 
 }
 
@@ -1003,73 +1102,73 @@ function toast(texto){
 // ATUALIZAR CACHE APÓS CARREGAR
 //======================================
 
-setTimeout(()=>{
+setTimeout(() => {
 
-    if(cursos.length){
+    if (cursos.length) {
 
         salvarCache();
 
     }
 
-},1000);
+}, 1000);
 
 //======================================
 // IMAGEM COM ERRO
 //======================================
 
-document.addEventListener("error",(e)=>{
+document.addEventListener("error", (e) => {
 
-    if(e.target.tagName==="IMG"){
+    if (e.target.tagName === "IMG") {
 
-        e.target.src=
+        e.target.src =
 
-        "https://placehold.co/400x250/161b22/ffffff?text=ST+Cursos";
+            "https://placehold.co/400x250/161b22/ffffff?text=ST+Cursos";
 
     }
 
-},true);
+}, true);
 
 //======================================
 // BOTÃO VOLTAR AO TOPO
 //======================================
 
-const voltarTopo=
+const voltarTopo =
 
-document.createElement("button");
+    document.createElement("button");
 
-voltarTopo.innerHTML="↑";
+voltarTopo.innerHTML = "↑";
 
-voltarTopo.className="voltar-topo";
+voltarTopo.className = "voltar-topo";
 
 document.body.appendChild(voltarTopo);
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-    if(window.scrollY>500){
+    if (window.scrollY > 500) {
 
-        voltarTopo.style.opacity="1";
+        voltarTopo.style.opacity = "1";
 
-        voltarTopo.style.pointerEvents="all";
+        voltarTopo.style.pointerEvents = "all";
 
     }
 
-    else{
+    else {
 
-        voltarTopo.style.opacity="0";
+        voltarTopo.style.opacity = "0";
 
-        voltarTopo.style.pointerEvents="none";
+        voltarTopo.style.pointerEvents = "none";
 
     }
 
 });
 
-voltarTopo.addEventListener("click",()=>{
+voltarTopo.addEventListener("click", () => {
 
     window.scrollTo({
 
-        top:0,
+        top: 0,
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
@@ -1079,17 +1178,17 @@ voltarTopo.addEventListener("click",()=>{
 // CONTADOR DE CURSOS
 //======================================
 
-function atualizarTitulo(){
+function atualizarTitulo() {
 
     const titulo =
 
-    document.querySelector("#cursos h2");
+        document.querySelector("#cursos h2");
 
-    if(!titulo) return;
+    if (!titulo) return;
 
-    titulo.textContent=
+    titulo.textContent =
 
-    `Todos os Cursos (${cursos.length})`;
+        `Todos os Cursos (${cursos.length})`;
 
 }
 
@@ -1099,23 +1198,23 @@ function atualizarTitulo(){
 // PRELOAD DAS PRIMEIRAS IMAGENS
 //======================================
 
-function preload(){
+function preload() {
 
-    cursos.slice(0,5).forEach(curso=>{
+    cursos.slice(0, 5).forEach(curso => {
 
         const img = new Image();
 
-        img.src=curso.imagem;
+        img.src = curso.imagem;
 
     });
 
 }
 
-setTimeout(preload,1500);
+setTimeout(preload, 1500);
 
 //======================================
 // MENSAGEM FINAL
 //======================================
 
 console.log("%cST Cursos V2 carregado!",
-"color:#22c55e;font-size:20px;font-weight:bold;");
+    "color:#22c55e;font-size:20px;font-weight:bold;");
