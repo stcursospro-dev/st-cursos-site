@@ -29,8 +29,8 @@ const containerCursos =
 const containerDestaques =
     document.querySelector(".cards");
 
-const maisVendidosContainer =
-    document.getElementById("mais-vendidos-container");
+const vendidosWrapper =
+    document.getElementById("vendidos-wrapper");
 
 const pesquisa =
     document.getElementById("pesquisa");
@@ -120,6 +120,16 @@ async function carregarCursos() {
                 destaque:
                     String(curso.destaque || "")
                         .trim()
+                        .toLowerCase(),
+
+                vendido:
+                    String(curso.vendido || "")
+                        .trim()
+                        .toLowerCase(),
+
+                novidade:
+                    String(curso.novidade || "")
+                        .trim()
                         .toLowerCase()
 
             };
@@ -131,6 +141,48 @@ async function carregarCursos() {
         mostrarDestaques();
 
         mostrarMaisVendidos();
+
+        new Swiper(".vendidosSwiper", {
+
+            slidesPerView: 1.2,
+
+            spaceBetween: 20,
+
+            speed: 700,
+
+            grabCursor: true,
+
+            navigation: {
+
+                nextEl: ".swiper-button-next",
+
+                prevEl: ".swiper-button-prev",
+
+            },
+
+            breakpoints: {
+
+                640: {
+
+                    slidesPerView: 2,
+
+                },
+
+                900: {
+
+                    slidesPerView: 3,
+
+                },
+
+                1200: {
+
+                    slidesPerView: 4,
+
+                }
+
+            }
+
+        });
 
         atualizarTitulo();
 
@@ -200,50 +252,133 @@ function criarCard(curso) {
 
         }
 
-            <img
-                src="${curso.imagem}"
-                alt="${curso.nome}"
-                loading="lazy"
-            >
+<div class="card-image">
+
+    <img
+        src="${curso.imagem}"
+        alt="${curso.nome}"
+        loading="lazy"
+    >
+
+    <div class="card-overlay"></div>
+
+</div>
 
             <div class="card-content">
 
                 <div class="card-category">
+    ${curso.categoria}
+</div>
 
-                    ${curso.categoria}
+<h3 class="card-title">
+    ${curso.nome}
+</h3>
 
-                </div>
+<p class="card-description">
+    ${curso.descricao}
+</p>
 
-                <h3 class="card-title">
+<div class="rating">
+    ⭐⭐⭐⭐⭐
+    <span>5.0</span>
+</div>
 
-                    ${curso.nome}
+<div class="card-features">
+    <span>⚡ Acesso imediato</span>
+    <span>📚 Conteúdo atualizado</span>
+</div>
 
-                </h3>
+<div class="card-price">
+    ${curso.preco}
+</div>
 
-                <p class="card-description">
-
-                    ${curso.descricao}
-
-                </p>
-
-                <div class="card-price">
-
-                    ${curso.preco}
-
-                </div>
-
-                <button
-                    onclick="window.open('${curso.link}','_blank')">
-
-                    Comprar Agora
-
-                </button>
-
-            </div>
-
+<button onclick="window.open('${curso.link}','_blank')">
+    Comprar Agora
+</button>
         </div>
 
     `;
+
+}
+
+function criarCardCarrossel(curso) {
+
+    return `
+
+    <div class="swiper-slide">
+
+        <div class="card">
+
+            <div class="badge">
+                🔥 Mais Vendido
+            </div>
+
+            <img
+                src="${curso.imagem}"
+                alt="${curso.nome}"
+            >
+
+           <div class="card-content">
+
+    <div class="card-category">
+        ${curso.categoria}
+    </div>
+
+    <h3 class="card-title">
+        ${curso.nome}
+    </h3>
+
+    <p class="card-description">
+        ${curso.descricao}
+    </p>
+
+    <div class="rating">
+        ⭐⭐⭐⭐⭐
+        <span>5.0</span>
+    </div>
+
+    <div class="card-features">
+        <span>⚡ Acesso imediato</span>
+        <span>📚 Conteúdo atualizado</span>
+    </div>
+
+    <div class="card-price">
+        ${curso.preco}
+    </div>
+
+    <button
+        onclick="window.open('${curso.link}','_blank')">
+
+        Comprar Agora
+
+    </button>
+
+</div>
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+function mostrarMaisVendidos() {
+
+    if (!vendidosWrapper) return;
+
+    vendidosWrapper.innerHTML = "";
+
+    const vendidos = cursos.filter(curso => {
+
+        return String(curso.vendido).toLowerCase() === "sim";
+
+    });
+
+    vendidos.forEach(curso => {
+
+        vendidosWrapper.innerHTML += criarCardCarrossel(curso);
+
+    });
 
 }
 
@@ -307,100 +442,6 @@ function mostrarDestaques() {
 
 }
 
-// =======================================================
-// CARROSSEL MAIS VENDIDOS
-// =======================================================
-
-function mostrarMaisVendidos() {
-
-    if (!maisVendidosContainer) return;
-
-
-    maisVendidosContainer.innerHTML = "";
-
-
-    const vendidos = cursos.filter(curso => {
-
-        return String(curso.vendido).toLowerCase() === "sim";
-
-    });
-
-
-    vendidos.forEach(curso => {
-
-
-        maisVendidosContainer.innerHTML += `
-
-        <div class="swiper-slide">
-
-            ${criarCard(curso)}
-
-        </div>
-
-        `;
-
-
-    });
-
-
-    iniciarSwiper();
-
-}
-
-
-// =======================================================
-// INICIAR SWIPER
-// =======================================================
-
-function iniciarSwiper() {
-
-    new Swiper(".maisVendidosSwiper", {
-
-        slidesPerView: 4,
-
-        spaceBetween: 25,
-
-        loop: true,
-
-
-        navigation: {
-
-            nextEl: ".swiper-button-next",
-
-            prevEl: ".swiper-button-prev",
-
-        },
-
-
-        breakpoints: {
-
-
-            1200: {
-                slidesPerView: 4
-            },
-
-
-            900: {
-                slidesPerView: 3
-            },
-
-
-            600: {
-                slidesPerView: 2
-            },
-
-
-            300: {
-                slidesPerView: 1
-            }
-
-
-        }
-
-
-    });
-
-}
 
 // =======================================================
 // ST CURSOS V2
