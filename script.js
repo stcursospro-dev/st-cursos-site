@@ -293,7 +293,7 @@ function criarCard(curso) {
 </div>
 
 <button onclick="window.open('${curso.link}','_blank')">
-    Comprar Agora
+    Adquira Agora
 </button>
         </div>
 
