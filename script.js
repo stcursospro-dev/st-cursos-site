@@ -143,7 +143,7 @@ async function carregarCursos() {
         mostrarMaisVendidos();
         new Swiper(".vendidosSwiper", {
 
-            slidesPerView: 1,
+            slidesPerView: "auto",
             spaceBetween: 25,
 
             speed: 700,
@@ -302,10 +302,17 @@ function criarCardCarrossel(curso) {
                 🔥 Mais Vendido
             </div>
 
-            <img
-                src="${curso.imagem}"
-                alt="${curso.nome}"
-            >
+            <div class="card-image">
+
+    <img
+        src="${curso.imagem}"
+        alt="${curso.nome}"
+        loading="lazy"
+    >
+
+    <div class="card-overlay"></div>
+
+</div>
 
            <div class="card-content">
 
