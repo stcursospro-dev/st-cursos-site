@@ -143,11 +143,11 @@ async function carregarCursos() {
         mostrarMaisVendidos();
         new Swiper(".vendidosSwiper", {
 
-            slidesPerView: "auto",
+            slidesPerView: 1,
+            slidesPerGroup: 1,
             spaceBetween: 25,
 
             speed: 700,
-
             grabCursor: true,
 
             navigation: {
@@ -158,15 +158,15 @@ async function carregarCursos() {
             breakpoints: {
 
                 640: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                 },
 
                 900: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                 },
 
                 1200: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                 }
 
             }

@@ -1610,44 +1610,28 @@ SWIPER / CARROSSEL PREMIUM
 =========================================================*/
 
 .swiper {
-
     width: 100%;
     padding: 40px 8px 90px;
     overflow: hidden;
     box-sizing: border-box;
-
 }
 
-
-
 .swiper-slide {
-
     display: flex;
     justify-content: center;
     height: auto;
-    width: auto;
-    margin-right: 35px;
-    margin-top: 60px;
-
-
-
 }
 
 .swiper-slide .card {
-
     width: 340px;
-
-
+    margin-top: 60px;
 }
 
 @media (max-width: 650px) {
-
-    .swiper-slide {
+    .swiper-slide .card {
         width: 280px;
-        margin: 10px;
         margin-top: 60px;
     }
-
 }
 
 
