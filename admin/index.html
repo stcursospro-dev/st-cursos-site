@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ST Cursos | Painel Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            ST Cursos
+
+        </div>
+
+        <div>
+
+            <h1>Painel Administrativo</h1>
+
+            <p>Gerencie todos os produtos da ST Cursos.</p>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="topo">
+
+            <button id="btnNovoProduto">
+
+                ➕ Novo Produto
+
+            </button>
+
+        </section>
+
+
+        <section class="pesquisa">
+
+            <input type="text" placeholder="🔍 Buscar produto...">
+
+        </section>
+
+
+        <section id="lista-produtos">
+
+            <!-- Cards aparecerão aqui -->
+
+        </section>
+
+    </main>
+
+    <!-- ================= MODAL ================= -->
+
+    <div id="modalProduto" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>📦 Novo Produto</h2>
+
+                <button id="fecharModal">&times;</button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="preview">
+
+                    <img id="previewImagem" src="https://placehold.co/350x500?text=Capa" alt="Preview">
+
+                </div>
+
+                <div class="formulario">
+
+                    <input type="text" id="nome" placeholder="Nome">
+                    <div class="linha">
+
+                        <select id="categoria">
+
+                            <option value="">Selecione uma categoria</option>
+
+                            <option value="Finanças">💰 Finanças</option>
+
+                            <option value="Marketing">📈 Marketing</option>
+
+                            <option value="Programação">💻 Programação</option>
+
+                            <option value="Inteligência Artificial">🤖 Inteligência Artificial</option>
+
+                            <option value="Desenvolvimento Pessoal">🧠 Desenvolvimento Pessoal</option>
+
+                            <option value="Saúde">💚 Saúde</option>
+
+                            <option value="Outros">📦 Outros</option>
+
+                        </select>
+
+                        <input type="text" id="preco" placeholder="Ex: 34,90">
+
+                    </div>
+
+                    <textarea id="descricao" placeholder="Descrição"></textarea>
+
+                    <div class="upload-area">
+
+                        <input type="file" id="imagem" accept="image/*" hidden>
+
+                        <button type="button" id="btnEscolherImagem">
+
+                            📤 Escolher imagem
+
+                        </button>
+
+                        <span id="nomeImagem">
+
+                            Nenhuma imagem selecionada
+
+                        </span>
+
+                    </div>
+
+                    <input type="text" id="link" placeholder="Link da Kiwify">
+
+                    <div class="checks">
+
+                        <label>
+
+                            <input type="checkbox" id="destaque">
+
+                            Destaque
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox" id="vendido">
+
+                            Mais vendido
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox" id="novidade">
+
+                            Novidade
+
+                        </label>
+
+                    </div>
+
+                    <button id="salvarProduto">
+
+                        Salvar Produto
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

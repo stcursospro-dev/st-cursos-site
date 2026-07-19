@@ -1,0 +1,437 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    background: #111315;
+
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 30px 60px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.logo {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #22c55e;
+
+}
+
+.header h1 {
+
+    font-size: 32px;
+
+}
+
+.header p {
+
+    color: #9ca3af;
+
+    margin-top: 5px;
+
+}
+
+main {
+
+    width: min(1300px, 95%);
+
+    margin: auto;
+
+    padding: 40px 0;
+
+}
+
+.topo {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-bottom: 30px;
+
+}
+
+#btnNovoProduto {
+
+    background: #22c55e;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px 25px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+#btnNovoProduto:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 15px 35px rgba(34, 197, 94, .35);
+
+}
+
+.pesquisa {
+
+    margin-bottom: 35px;
+
+}
+
+.pesquisa input {
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #1b1f24;
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+
+}
+
+#lista-produtos {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+    gap: 25px;
+
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, .7);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999;
+
+}
+
+.modal-content {
+
+    width: 1100px;
+
+    max-width: 95%;
+
+    background: #181c20;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    animation: fade .25s;
+
+}
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 30px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.modal-header h2 {
+
+    color: #22c55e;
+
+}
+
+.modal-header button {
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+}
+
+.modal-body {
+
+    display: grid;
+
+    grid-template-columns: 300px 1fr;
+
+    gap: 25px;
+
+}
+
+.preview {
+
+    background: #111315;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+}
+
+.preview img {
+
+    width: 100%;
+
+    height: 390px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+}
+
+.formulario {
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+.formulario input,
+
+.formulario textarea,
+
+.formulario select {
+
+    background: #23272d;
+
+    border: none;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    outline: none;
+
+}
+
+.formulario textarea {
+
+    resize: none;
+
+    height: 120px;
+
+}
+
+.checks {
+
+    display: flex;
+
+    gap: 25px;
+
+}
+
+.checks label {
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+}
+
+#salvarProduto {
+
+    margin-top: 15px;
+
+    background: #22c55e;
+
+    color: white;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+}
+
+@keyframes fade {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(.95);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+    }
+
+}
+
+.upload-area {
+
+    border: 2px dashed #22c55e;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    background: #1e293b;
+
+}
+
+.upload-area:hover {
+
+    background: #273449;
+
+}
+
+.upload-area h3 {
+
+    color: #22c55e;
+
+    margin-bottom: 8px;
+
+}
+
+.upload-area p {
+
+    color: #b7b7b7;
+
+    font-size: 14px;
+
+}
+
+#btnEscolherImagem {
+
+    background: #22c55e;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: .3s;
+
+}
+
+#btnEscolherImagem:hover {
+
+    transform: translateY(-2px);
+
+}
+
+#nomeImagem {
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+}
+
+.linha {
+
+    display: flex;
+
+    gap: 15px;
+
+}
+
+.linha select {
+
+    flex: 2;
+
+}
+
+.linha input {
+
+    flex: 1;
+
+}
