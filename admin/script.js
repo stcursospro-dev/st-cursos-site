@@ -176,19 +176,9 @@ btnSalvar.addEventListener("click", async () => {
 
             method: "POST",
 
-            redirect: "follow",
-
-            headers: {
-
-                "Content-Type": "text/plain;charset=utf-8"
-
-            },
-
             body: JSON.stringify(produto)
 
         });
-
-        const resultado = await resposta.json();
 
 
         const resultado = await resposta.json();
