@@ -1,3 +1,5 @@
+const API_URL = "https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
+
 window.onload = () => {
 
     google.accounts.id.initialize({
@@ -30,7 +32,9 @@ window.onload = () => {
 
 }
 
-function respostaGoogle(resposta) {
+async function respostaGoogle(resposta) {
+
+    console.log("Entrou na respostaGoogle");
 
     const dados = JSON.parse(atob(resposta.credential.split(".")[1]));
 
@@ -43,6 +47,36 @@ function respostaGoogle(resposta) {
         foto: dados.picture
 
     };
+
+    try {
+
+        const respostaAPI = await fetch(API_URL, {
+
+            method: "POST",
+
+            body: JSON.stringify({
+
+                acao: "login",
+
+                ...usuario
+
+            })
+
+        });
+
+        const resultado = await respostaAPI.json();
+
+        usuario.cargo = resultado.cargo;
+
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+
+        console.log(resultado);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+    }
 
     localStorage.setItem("usuario", JSON.stringify(usuario));
 

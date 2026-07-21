@@ -145,7 +145,7 @@ header {
     z-index: 999;
 
     box-shadow: var(--shadow);
-    
+
 
 }
 
@@ -155,9 +155,18 @@ header {
 
     align-items: center;
 
+    position: relative;
+
 }
 
+
+
+
+
+
 .usuario-logado {
+
+    position: relative;
 
     display: flex;
 
@@ -167,24 +176,73 @@ header {
 
     cursor: pointer;
 
-    color: white;
+}
 
-    font-weight: 600;
+.foto-usuario {
+
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 42px;
+    border: 2px solid #22c55e;
 
 }
 
+.nome-usuario {
 
-.usuario-logado img {
+    font-weight: 600;
+    color: #fff;
 
-    width: 42px;
+}
 
-    height: 42px;
+.seta-perfil {
 
-    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+    transition: .25s;
 
-    object-fit: cover;
+}
 
-    border: 2px solid #22c55e;
+#dropdownPerfil {
+
+    position: absolute;
+
+    top: 110%;
+
+    right: 0;
+
+    width: 230px;
+
+    display: none;
+
+    background: #1b1b1b;
+
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+
+    overflow: hidden;
+
+}
+
+#dropdownPerfil a {
+
+    display: block;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 15px;
+
+    transition: .25s;
+
+}
+
+#dropdownPerfil a:hover {
+
+    background: #2d2d2d;
 
 }
 

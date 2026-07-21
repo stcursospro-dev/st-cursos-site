@@ -1243,10 +1243,9 @@ function atualizarTitulo() {
 const areaUsuario = document.getElementById("areaUsuario");
 
 
-function carregarUsuario() {
+async function carregarUsuario() {
 
     const usuario = JSON.parse(localStorage.getItem("usuario"));
-
 
     if (!usuario) {
 
@@ -1254,22 +1253,72 @@ function carregarUsuario() {
 
     }
 
+    const resposta = await fetch(API_URL, {
 
-    areaUsuario.innerHTML = `
+        method: "POST",
 
-        <div class="usuario-logado">
+        body: JSON.stringify({
 
-            <img src="${usuario.foto}">
+            acao: "buscarCargo",
 
-            <span>
-                ${usuario.nome}
-            </span>
+            email: usuario.email
 
-        </div>
+        })
 
-    `;
+    });
+
+    const dados = await resposta.json();
+
+    usuario.cargo = dados.cargo;
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    document.getElementById("btnEntrar").style.display = "none";
+    document.getElementById("btnAdmin").style.display =
+        usuario.cargo === "admin"
+            ? "block"
+            : "none";
+
+    areaUsuario.insertAdjacentHTML("afterbegin", `
+
+<div class="usuario-logado">
+
+    <img src="${usuario.foto}" class="foto-usuario">
+
+    <span class="nome-usuario">
+        ${usuario.nome}
+    </span>
+
+    <i class="fa-solid fa-chevron-down seta-perfil"></i>
+
+</div>
+
+`);
 
 }
+
+document.addEventListener("click", function (e) {
+
+    const perfil = document.querySelector(".usuario-logado");
+
+    const menu = document.getElementById("dropdownPerfil");
+
+    if (!perfil) return;
+
+    if (perfil.contains(e.target)) {
+
+        menu.style.display =
+            menu.style.display === "block"
+                ? "none"
+                : "block";
+
+    } else {
+
+        menu.style.display = "none";
+
+    }
+
+});
 
 
 carregarUsuario();
