@@ -9,7 +9,7 @@
 
     <title>ST Cursos | Painel Admin</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="adminstyle.css">
 
 </head>
 
@@ -95,17 +95,22 @@
 
                             <option value="Finanças">💰 Finanças</option>
 
-                            <option value="Marketing">📈 Marketing</option>
-
-                            <option value="Programação">💻 Programação</option>
-
                             <option value="Inteligência Artificial">🤖 Inteligência Artificial</option>
+                            
+                            <option value="Programação">💻 Programação</option>
+                            
+                            <option value="Marketing">📈 Marketing</option>
+                            
+                            <option value="Design">🎨 Design</option>
+                            
+                            <option value="Redes Sociais">📱 Redes Sociais</option>
+                            
+                            <option value="Saúde">🧠 Saúde</option>
+                            
+                            <option value="Culinária">🍽️ Culinária</option>
+                            
+                            <option value="Educação">📚 Educação</option>
 
-                            <option value="Desenvolvimento Pessoal">🧠 Desenvolvimento Pessoal</option>
-
-                            <option value="Saúde">💚 Saúde</option>
-
-                            <option value="Outros">📦 Outros</option>
 
                         </select>
 
@@ -177,7 +182,37 @@
 
     </div>
 
-    <script src="script.js"></script>
+    <!-- ================= MODAL EXCLUIR ================= -->
+
+     <div id="modal-excluir" class="modal">
+
+                <div id="modal-excluir-content" class="modal-content">
+
+                    <h2>🗑️ Excluir Arquivo</h2>
+
+                    <p id="texto-excluir">
+                        Tem certeza que deseja excluir este arquivo?
+                    </p>
+
+                    <div class="modal-buttons">
+
+                        <button id="cancelar-excluir">
+                            Cancelar
+                        </button>
+
+                        <button id="confirmar-excluir">
+                            Excluir
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+    <script src="adminscript.js"></script>
+
+    <div id="toast"></div>
 
 </body>
 

@@ -105,8 +105,10 @@ async function carregarCursos() {
                 categoria:
                     String(curso.categoria || "").trim(),
 
-                preco:
-                    String(curso.preco || "").trim(),
+                preco: Number(
+                    String(curso.preco || "0")
+                        .replace(",", ".")
+                ),
 
                 descricao:
                     String(curso.descricao || "").trim(),
@@ -278,7 +280,10 @@ function criarCard(curso) {
 </div>
 
 <div class="card-price">
-    ${curso.preco}
+    ${curso.preco.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })}
 </div>
 
 <button onclick="window.open('${curso.link}','_blank')">
@@ -339,8 +344,11 @@ function criarCardCarrossel(curso) {
     </div>
 
     <div class="card-price">
-        ${curso.preco}
-    </div>
+    ${curso.preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    })}
+</div>
 
     <button
         onclick="window.open('${curso.link}','_blank')">
@@ -577,13 +585,16 @@ function mostrarResultadosPesquisa(lista) {
 
                     <p>
 
-                        📂 ${curso.categoria}
+                         ${curso.categoria}
 
                     </p>
 
                     <div class="search-price">
 
-                        ${curso.preco}
+                        ${curso.preco.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })}
 
                     </div>
 
@@ -1229,6 +1240,40 @@ function atualizarTitulo() {
 
 }
 
+const areaUsuario = document.getElementById("areaUsuario");
+
+
+function carregarUsuario() {
+
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+
+    if (!usuario) {
+
+        return;
+
+    }
+
+
+    areaUsuario.innerHTML = `
+
+        <div class="usuario-logado">
+
+            <img src="${usuario.foto}">
+
+            <span>
+                ${usuario.nome}
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+carregarUsuario();
+
 
 
 //======================================
@@ -1255,3 +1300,7 @@ setTimeout(preload, 1500);
 
 console.log("%cST Cursos V2 carregado!",
     "color:#22c55e;font-size:20px;font-weight:bold;");
+
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+console.log(usuario);
