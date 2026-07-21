@@ -48,6 +48,6 @@ function respostaGoogle(resposta) {
 
     console.log(usuario);
 
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 
 }
