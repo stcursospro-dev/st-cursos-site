@@ -1,3 +1,5 @@
+protegerAdmin();
+
 //CONFIGURAÇÕES CLOUDINARY
 
 const CLOUD_NAME = "gumshwlu";
@@ -5,8 +7,6 @@ const UPLOAD_PRESET = "st-cursos-upload";
 
 //API PLANILHA
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
 
 let imagemCloudinary = "";
 let produtoEditando = null;

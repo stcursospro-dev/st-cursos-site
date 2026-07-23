@@ -8,8 +8,7 @@
 // CONFIGURAÇÕES
 //===============================
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
+
 
 //===============================
 // DADOS
@@ -1245,7 +1244,7 @@ const areaUsuario = document.getElementById("areaUsuario");
 
 async function carregarUsuario() {
 
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const usuario = obterSessao();
 
     if (!usuario) {
 
@@ -1271,11 +1270,11 @@ async function carregarUsuario() {
 
     usuario.cargo = dados.cargo;
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
+    atualizarSessao(usuario);
 
     document.getElementById("btnEntrar").style.display = "none";
     document.getElementById("btnAdmin").style.display =
-        usuario.cargo === "admin"
+        ehAdmin()
             ? "block"
             : "none";
 
@@ -1294,6 +1293,34 @@ async function carregarUsuario() {
 </div>
 
 `);
+
+}
+
+async function atualizarCargo() {
+
+    const usuario = obterSessao();
+
+    if (!usuario) return;
+
+    const resposta = await fetch(API_URL, {
+
+        method: "POST",
+
+        body: JSON.stringify({
+
+            acao: "buscarCargo",
+
+            email: usuario.email
+
+        })
+
+    });
+
+    const dados = await resposta.json();
+
+    usuario.cargo = dados.cargo;
+
+    atualizarSessao(usuario);
 
 }
 
@@ -1321,7 +1348,15 @@ document.addEventListener("click", function (e) {
 });
 
 
-carregarUsuario();
+async function iniciarSite() {
+
+    await atualizarCargo();
+
+    carregarUsuario();
+
+}
+
+iniciarSite();
 
 
 
@@ -1350,6 +1385,5 @@ setTimeout(preload, 1500);
 console.log("%cST Cursos V2 carregado!",
     "color:#22c55e;font-size:20px;font-weight:bold;");
 
-const usuario = JSON.parse(localStorage.getItem("usuario"));
-
+const usuario = obterSessao();
 console.log(usuario);

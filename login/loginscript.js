@@ -1,4 +1,3 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyQL_sRu82TuIIoNE8e_vmo4DYoNact6pXbPjiH1MNTnjA3-SbxgZIbAzGgVzxh3icMcQ/exec";
 
 window.onload = () => {
 
@@ -50,25 +49,11 @@ async function respostaGoogle(resposta) {
 
     try {
 
-        const respostaAPI = await fetch(API_URL, {
-
-            method: "POST",
-
-            body: JSON.stringify({
-
-                acao: "login",
-
-                ...usuario
-
-            })
-
-        });
-
-        const resultado = await respostaAPI.json();
-
+        const resultado = await api.login(usuario);
+        
         usuario.cargo = resultado.cargo;
 
-        localStorage.setItem("usuario", JSON.stringify(usuario));
+        atualizarSessao(usuario);
 
         console.log(resultado);
 
@@ -78,7 +63,7 @@ async function respostaGoogle(resposta) {
 
     }
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
+    atualizarSessao(usuario);
 
     console.log(usuario);
 
